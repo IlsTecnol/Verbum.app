@@ -1,19 +1,19 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from '@/contexts/AuthContext';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { Toaster } from '@/components/ui/toaster';
-import ScrollToTop from '@/components/ScrollToTop';
-import LoginPage from '@/pages/LoginPage';
-import SignupPage from '@/pages/SignupPage';
-import OnboardingFlow from '@/pages/OnboardingFlow';
-import DashboardPage from '@/pages/DashboardPage';
-import BiblePage from '@/pages/BiblePage';
-import SermonsPage from '@/pages/SermonsPage';
-import ProfilePage from '@/pages/ProfilePage';
-import AgendaPage from '@/pages/AgendaPage';
-import MyFavoritesPage from '@/pages/MyFavoritesPage';
-import FormationPage from '@/pages/FormationPage';
+import { AuthProvider, useAuth } from '/contexts/AuthContext';
+import { ThemeProvider } from '/contexts/ThemeContext';
+import { Toaster } from '/components/ui/toaster';
+import ScrollToTop from '/components/ScrollToTop';
+import LoginPage from '/pages/LoginPage';
+import SignupPage from '/pages/SignupPage';
+import OnboardingFlow from '/pages/OnboardingFlow';
+import DashboardPage from '/pages/DashboardPage';
+import BiblePage from '/pages/BiblePage';
+import SermonsPage from '/pages/SermonsPage';
+import ProfilePage from '/pages/ProfilePage';
+import AgendaPage from '/pages/AgendaPage';
+import MyFavoritesPage from '/pages/MyFavoritesPage';
+import FormationPage from '/pages/FormationPage';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
