@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, BrowserRouter as Router, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -18,7 +18,10 @@ import AgendaPage from "./pages/AgendaPage";
 import MyFavoritesPage from "./pages/MyFavoritesPage";
 import FormationPage from "./pages/FormationPage";
 
-const ProtectedRoute = ({ children }) => {
+/* =======================
+   ROUTAS PROTEGIDAS
+======================= */
+function ProtectedRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
@@ -34,9 +37,12 @@ const ProtectedRoute = ({ children }) => {
   }
 
   return children;
-};
+}
 
-const PublicRoute = ({ children }) => {
+/* =======================
+   ROTAS PÚBLICAS
+======================= */
+function PublicRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
@@ -52,31 +58,118 @@ const PublicRoute = ({ children }) => {
   }
 
   return children;
-};
+}
 
+/* =======================
+   MAPA DE ROTAS
+======================= */
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
-      <Route path="/signup" element={<PublicRoute><SignupPage /></PublicRoute>} />
+      {/* Públicas */}
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        }
+      />
 
-      <Route path="/onboarding" element={<ProtectedRoute><OnboardingFlow /></ProtectedRoute>} />
-      <Route path="/home" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-      <Route path="/bible" element={<ProtectedRoute><BiblePage /></ProtectedRoute>} />
-      <Route path="/favorites" element={<ProtectedRoute><MyFavoritesPage /></ProtectedRoute>} />
-      <Route path="/agenda" element={<ProtectedRoute><AgendaPage /></ProtectedRoute>} />
-      <Route path="/sermons" element={<ProtectedRoute><SermonsPage /></ProtectedRoute>} />
-      <Route path="/formation" element={<ProtectedRoute><FormationPage /></ProtectedRoute>} />
-      <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+      <Route
+        path="/signup"
+        element={
+          <PublicRoute>
+            <SignupPage />
+          </PublicRoute>
+        }
+      />
 
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      {/* Protegidas */}
+      <Route
+        path="/onboarding"
+        element={
+          <ProtectedRoute>
+            <OnboardingFlow />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/bible"
+        element={
+          <ProtectedRoute>
+            <BiblePage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/favorites"
+        element={
+          <ProtectedRoute>
+            <MyFavoritesPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/agenda"
+        element={
+          <ProtectedRoute>
+            <AgendaPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/sermons"
+        element={
+          <ProtectedRoute>
+            <SermonsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/formation"
+        element={
+          <ProtectedRoute>
+            <FormationPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }
 
-function App() {
+/* =======================
+   APP ROOT
+======================= */
+export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <ThemeProvider>
         <AuthProvider>
           <ScrollToTop />
@@ -84,8 +177,6 @@ function App() {
           <Toaster />
         </AuthProvider>
       </ThemeProvider>
-    </Router>
+    </BrowserRouter>
   );
 }
-
-export default App;
