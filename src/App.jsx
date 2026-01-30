@@ -1,19 +1,22 @@
-import React from 'react';
-import { Route, Routes, BrowserRouter as Router, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from '/contexts/AuthContext';
-import { ThemeProvider } from '/contexts/ThemeContext';
-import { Toaster } from '/components/ui/toaster';
-import ScrollToTop from '/components/ScrollToTop';
-import LoginPage from '/pages/LoginPage';
-import SignupPage from '/pages/SignupPage';
-import OnboardingFlow from '/pages/OnboardingFlow';
-import DashboardPage from '/pages/DashboardPage';
-import BiblePage from '/pages/BiblePage';
-import SermonsPage from '/pages/SermonsPage';
-import ProfilePage from '/pages/ProfilePage';
-import AgendaPage from '/pages/AgendaPage';
-import MyFavoritesPage from '/pages/MyFavoritesPage';
-import FormationPage from '/pages/FormationPage';
+import React from "react";
+import { Route, Routes, BrowserRouter as Router, Navigate } from "react-router-dom";
+
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
+
+import { Toaster } from "./components/ui/toaster";
+import ScrollToTop from "./components/ScrollToTop";
+
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import OnboardingFlow from "./pages/OnboardingFlow";
+import DashboardPage from "./pages/DashboardPage";
+import BiblePage from "./pages/BiblePage";
+import SermonsPage from "./pages/SermonsPage";
+import ProfilePage from "./pages/ProfilePage";
+import AgendaPage from "./pages/AgendaPage";
+import MyFavoritesPage from "./pages/MyFavoritesPage";
+import FormationPage from "./pages/FormationPage";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -56,7 +59,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
       <Route path="/signup" element={<PublicRoute><SignupPage /></PublicRoute>} />
-      
+
       <Route path="/onboarding" element={<ProtectedRoute><OnboardingFlow /></ProtectedRoute>} />
       <Route path="/home" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
       <Route path="/bible" element={<ProtectedRoute><BiblePage /></ProtectedRoute>} />
@@ -65,7 +68,7 @@ function AppRoutes() {
       <Route path="/sermons" element={<ProtectedRoute><SermonsPage /></ProtectedRoute>} />
       <Route path="/formation" element={<ProtectedRoute><FormationPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-      
+
       <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>
   );
